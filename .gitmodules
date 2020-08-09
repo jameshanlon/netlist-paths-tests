@@ -1,0 +1,6 @@
+[submodule "thirdparty/nvdla"]
+	path = thirdparty/nvdla
+	url = git@github.com:jameshanlon/hw.git
+[submodule "netlist-paths"]
+	path = netlist-paths
+	url = https://github.com/jameshanlon/netlist-paths.git
