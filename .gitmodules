@@ -5,3 +5,6 @@
 [submodule "netlist-paths"]
 	path = netlist-paths
 	url = https://github.com/jameshanlon/netlist-paths.git
+[submodule "thirdparty/picorv32"]
+	path = thirdparty/picorv32
+	url = https://github.com/cliffordwolf/picorv32.git

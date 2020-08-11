@@ -11,6 +11,17 @@ class NetlistPathsTests(unittest.TestCase):
     def test_verilator_exe(self):
         self.assertTrue(os.path.exists(defs.VERILATOR_EXE))
 
+    def test_picorv32(self):
+        output_file = os.path.join(defs.WORKING_DIR, 'picorv32.xml')
+        test_directory = os.path.join(defs.SOURCE_DIR, 'thirdparty', 'picorv32')
+        subprocess.check_call([defs.VERILATOR_EXE,
+                               '--xml-only', '--flatten',
+                               '--error-limit', '10000',
+                               '--xml-output', output_file,
+                               '--top-module', 'picorv32_axi', 'picorv32.v'],
+                              cwd=test_directory)
+        np.NetlistPaths('picorv32.xml')
+
     def test_nvdla(self):
         output_file = os.path.join(defs.WORKING_DIR, 'nvdla.xml')
         test_directory = os.path.join(defs.SOURCE_DIR, 'thirdparty', 'nvdla', 'verif', 'verilator')
@@ -22,6 +33,7 @@ class NetlistPathsTests(unittest.TestCase):
                                '--timescale-override', '1ns'],
                               cwd=test_directory)
         np.NetlistPaths('nvdla.xml')
+
 
 if __name__ == '__main__':
     unittest.main()
