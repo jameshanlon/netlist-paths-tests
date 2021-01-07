@@ -8,3 +8,7 @@
 [submodule "thirdparty/picorv32"]
 	path = thirdparty/picorv32
 	url = https://github.com/cliffordwolf/picorv32.git
+[submodule "thirdparty/rsd"]
+	path = thirdparty/rsd
+	url = git@github.com:jameshanlon/rsd.git
+  branch = netlist-paths

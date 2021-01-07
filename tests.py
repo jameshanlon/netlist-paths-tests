@@ -12,27 +12,46 @@ class NetlistPathsTests(unittest.TestCase):
         self.assertTrue(os.path.exists(defs.VERILATOR_EXE))
 
     def test_picorv32(self):
-        output_file = os.path.join(defs.WORKING_DIR, 'picorv32.xml')
+        xml_file = os.path.join(defs.WORKING_DIR, 'picorv32.xml')
+        log_file = os.path.join(defs.WORKING_DIR, 'picorv32.log')
         test_directory = os.path.join(defs.SOURCE_DIR, 'thirdparty', 'picorv32')
-        subprocess.check_call([defs.VERILATOR_EXE,
-                               '--xml-only', '--flatten',
-                               '--error-limit', '10000',
-                               '--xml-output', output_file,
-                               '--top-module', 'picorv32_axi', 'picorv32.v'],
-                              cwd=test_directory)
-        np.NetlistPaths('picorv32.xml')
+        with open(log_file, 'wb') as fp:
+            proc = subprocess.Popen([defs.VERILATOR_EXE,
+                                     '--xml-only', '--flatten',
+                                     '--error-limit', '10000',
+                                     '--xml-output', xml_file,
+                                     '--top-module', 'picorv32_axi', 'picorv32.v'],
+                                    stdout=fp, stderr=subprocess.STDOUT,
+                                    cwd=test_directory)
+            proc.wait()
+        np.Netlist(xml_file)
 
     def test_nvdla(self):
-        output_file = os.path.join(defs.WORKING_DIR, 'nvdla.xml')
+        xml_file = os.path.join(defs.WORKING_DIR, 'nvdla.xml')
+        log_file = os.path.join(defs.WORKING_DIR, 'nvdla.log')
         test_directory = os.path.join(defs.SOURCE_DIR, 'thirdparty', 'nvdla', 'verif', 'verilator')
-        subprocess.check_call([defs.VERILATOR_EXE,
-                               '--xml-only', '--flatten',
-                               '--error-limit', '10000',
-                               '--xml-output', output_file,
-                               '-f', 'verilator.f',
-                               '--timescale-override', '1ns'],
-                              cwd=test_directory)
-        np.NetlistPaths('nvdla.xml')
+        with open(log_file, 'wb') as fp:
+            proc = subprocess.Popen([defs.VERILATOR_EXE,
+                                     '--xml-only', '--flatten',
+                                     '--error-limit', '10000',
+                                     '--xml-output', xml_file,
+                                     '-f', 'verilator.f',
+                                     '--timescale-override', '1ns'],
+                                    stdout=fp, stderr=subprocess.STDOUT,
+                                    cwd=test_directory)
+            proc.wait()
+        np.Netlist('nvdla.xml')
+
+    def test_rsd(self):
+        xml_file = os.path.join(defs.WORKING_DIR, 'rsd.xml')
+        log_file = os.path.join(defs.WORKING_DIR, 'rsd.log')
+        test_directory = os.path.join(defs.SOURCE_DIR, 'thirdparty', 'rsd', 'Processor', 'Src')
+        with open(log_file, 'wb') as fp:
+            proc = subprocess.Popen(['make', '-B', '-f', 'Makefile.verilator.mk', 'XML_OUTPUT='+xml_file],
+                                    stdout=fp, stderr=subprocess.STDOUT,
+                                    cwd=test_directory)
+            proc.wait()
+        np.Netlist(xml_file)
 
 
 if __name__ == '__main__':

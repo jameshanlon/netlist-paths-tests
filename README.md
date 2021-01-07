@@ -17,12 +17,19 @@ git submodule update --init --recursive
 mkdir Release
 cd Release
 cmake .. -DCMAKE_BUILD_TYPE=Release
-cmake -j8
+make -j8 install
 ```
 
 # Run the tests
 
 ```
 cd Release
-ctest .
+make
+python3 tests.py --verbose # or 'ctest .'
 ```
+
+# Included designs
+
+- NVDLA, the Nvidia Deep Learning accelerator core (https://github.com/nvdla/hw).
+- Picorv32, a 32-bit RISC-V processor core (https://github.com/cliffordwolf/picorv32).
+- RSD, a 32-bit out-of-order RISC-V processor core (https://github.com/rsd-devel/rsd).
