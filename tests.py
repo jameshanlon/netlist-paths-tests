@@ -47,7 +47,9 @@ class NetlistPathsTests(unittest.TestCase):
         log_file = os.path.join(defs.WORKING_DIR, 'rsd.log')
         test_directory = os.path.join(defs.SOURCE_DIR, 'thirdparty', 'rsd', 'Processor', 'Src')
         with open(log_file, 'wb') as fp:
-            proc = subprocess.Popen(['make', '-B', '-f', 'Makefile.verilator.mk', 'XML_OUTPUT='+xml_file],
+            proc = subprocess.Popen(['make', '-B', '-f', 'Makefile.verilator.mk',
+                                     'XML_OUTPUT='+xml_file,
+                                     'VERILATOR_BIN='+defs.VERILATOR_EXE],
                                     stdout=fp, stderr=subprocess.STDOUT,
                                     cwd=test_directory)
             proc.wait()
