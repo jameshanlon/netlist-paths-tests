@@ -10,5 +10,4 @@
 	url = https://github.com/cliffordwolf/picorv32.git
 [submodule "thirdparty/rsd"]
 	path = thirdparty/rsd
-	url = git@github.com:jameshanlon/rsd.git
-  branch = netlist-paths
+	url = https://github.com/rsd-devel/rsd.git

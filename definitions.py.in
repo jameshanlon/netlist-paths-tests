@@ -3,4 +3,4 @@ SOURCE_DIR='${CMAKE_CURRENT_SOURCE_DIR}'
 WORKING_DIR='${CMAKE_CURRENT_BINARY_DIR}'
 BINARY_DIR_PREFIX=os.path.join('${CMAKE_BINARY_DIR}', 'netlist-paths')
 INSTALL_PREFIX=os.path.join(BINARY_DIR_PREFIX, 'bin')
-VERILATOR_EXE=os.path.join(INSTALL_PREFIX, 'np-verilator')
+VERILATOR_EXE=os.path.join(INSTALL_PREFIX, 'np-verilator_bin')
