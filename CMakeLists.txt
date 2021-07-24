@@ -24,5 +24,5 @@ configure_file(tests.py
                COPYONLY)
 
 add_test(NAME tests.py
-         COMMAND ${Python3_EXECUTABLE} tests.py
+         COMMAND ${Python3_EXECUTABLE} tests.py -v
          WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
