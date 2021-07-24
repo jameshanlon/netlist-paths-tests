@@ -39,7 +39,7 @@ class NetlistPathsTests(unittest.TestCase):
                                     stdout=fp, stderr=subprocess.STDOUT,
                                     cwd=test_directory)
             proc.wait()
-        np.Netlist('nvdla.xml')
+        np.Netlist(xml_file)
 
     def test_rsd(self):
         xml_file = os.path.join(defs.WORKING_DIR, 'rsd.xml')
