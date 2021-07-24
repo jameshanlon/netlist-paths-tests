@@ -19,10 +19,15 @@ ExternalProject_Add(netlist-paths
 configure_file(definitions.py.in
                definitions.py)
 
-configure_file(tests.py
-               ${CMAKE_CURRENT_BINARY_DIR}
-               COPYONLY)
+function(add_py_test test_name test_source_file)
+  configure_file(${test_source_file}
+                 ${CMAKE_CURRENT_BINARY_DIR}
+                 COPYONLY)
+  add_test(NAME ${test_name}
+           COMMAND ${Python3_EXECUTABLE} ${test_source_file} -v
+           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+endfunction()
 
-add_test(NAME tests.py
-         COMMAND ${Python3_EXECUTABLE} tests.py -v
-         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+add_py_test(test_picorv32 test_picorv32.py)
+add_py_test(test_rsd      test_rsd.py)
+add_py_test(test_nvdla    test_nvdla.py)
