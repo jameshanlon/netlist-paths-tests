@@ -21,8 +21,11 @@ class TestPicorv32(unittest.TestCase):
                                     stdout=fp, stderr=subprocess.STDOUT,
                                     cwd=test_directory)
             proc.wait()
+        np.Options.get_instance().set_error_on_unmatched_node(True)
         self.netlist = np.Netlist(xml_file)
 
+    def test_picorv32(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()

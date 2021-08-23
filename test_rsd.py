@@ -25,8 +25,11 @@ class TestRSD(unittest.TestCase):
         # Copy the XML file back out.
         shutil.copyfile(os.path.join(test_directory, 'rsd.xml'),
                         os.path.join(defs.WORKING_DIR, 'rsd.xml'))
+        np.Options.get_instance().set_error_on_unmatched_node(True)
         self.netlist = np.Netlist(xml_file)
 
+  def test_rsd(self):
+      pass
 
 if __name__ == '__main__':
     unittest.main()
